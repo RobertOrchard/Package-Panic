@@ -67,7 +67,7 @@ public class PlayerControl : MonoBehaviour
                 furthestEdgeDist * (Global.Instance.GlobalRight * (moveInput.x < 0f ? 1f : -1f));
             rb.AddForceAtPosition(_force, _position, ForceMode.Force); // creates a torque*/
 
-            Vector3 force = moveInput.x * moveForce * rb.mass * Time.fixedDeltaTime * Global.Instance.GlobalRight;
+            Vector3 force = moveInput.x * moveForce * rb.mass * Time.fixedDeltaTime * global.GlobalRight;
             rb.AddForce(force, ForceMode.Force);
         }
         if (moveInput.y != 0f) // forward/backward
@@ -77,7 +77,7 @@ public class PlayerControl : MonoBehaviour
                 furthestEdgeDist * (Global.Instance.GlobalForward * (moveInput.y < 0f ? 1f : -1f));
             rb.AddForceAtPosition(_force, _position, ForceMode.Force);*/
 
-            Vector3 force = moveInput.y * moveForce * rb.mass * Time.fixedDeltaTime * Global.Instance.GlobalForward;
+            Vector3 force = moveInput.y * moveForce * rb.mass * Time.fixedDeltaTime * global.GlobalForward;
             rb.AddForce(force, ForceMode.Force);
         }
     }
@@ -124,7 +124,9 @@ public class PlayerControl : MonoBehaviour
     void CalculateJumpFace()
     {
         Vector3 targetPos = transform.position;
-        targetPos += new Vector3(lastMoveInput.x, 0f, lastMoveInput.y) * .5f; // influenced by movement
+        targetPos += lastMoveInput.x * .5f * global.GlobalRight;
+        targetPos += lastMoveInput.y * .5f * global.GlobalForward;
+        //targetPos += new Vector3(lastMoveInput.x, 0f, lastMoveInput.y) * .5f; // doesn't use cameraspace
         targetPos.y += .3f;
 
         int bestIndex = -1;
