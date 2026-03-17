@@ -111,7 +111,7 @@ public class PlayerControl : MonoBehaviour
 
     private void Update()
     {
-        if (global != null && global.IsPaused) return;
+        if (global == null || global.IsPaused) return;
 
         CalculateJumpFace();
         Jump();
