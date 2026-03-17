@@ -203,6 +203,8 @@ MonoBehaviour:
   moveForce: 700
   baseJumpForce: 3
   airControlMult: 0.1
+  jumpCooldown: 0.4
+  maxCoyoteTime: 0.05
 --- !u!114 &753529987909114287
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,6 +10,10 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] float moveForce = 10f;
     [SerializeField] float baseJumpForce = 3f;
     [Range(0f, 1f), SerializeField] float airControlMult = 0.1f;
+    [SerializeField] float jumpCooldown = .4f;
+    float elapsedSinceJump = 0f;
+    [SerializeField] float maxCoyoteTime = 0.1f;
+    float elapsedCTime = 0f;
 
     Rigidbody rb;
     CameraController camCont = null;
@@ -84,12 +88,21 @@ public class PlayerControl : MonoBehaviour
 
     private void Jump()
     {
+        if(elapsedSinceJump < jumpCooldown)
+        {
+            elapsedSinceJump += Time.deltaTime;
+            return;
+        }
+
         if(jumpFace == null) return;
         if (!onGround) return;
         if(!input.Player.Jump.WasPressedThisFrame()) return;
 
         Vector3 upDir = (jumpFace.position - transform.position).normalized;
         rb.AddForce(rb.mass * (digits + baseJumpForce) * upDir, ForceMode.Impulse);
+
+        elapsedCTime = maxCoyoteTime;
+        elapsedSinceJump = 0f;
     }
 
     private void Look()
@@ -154,8 +167,22 @@ public class PlayerControl : MonoBehaviour
     {
         Vector3 endPos = transform.position;
         endPos += Vector3.down * furthestEdgeDist;
-        onGround = Physics.Raycast(transform.position, Vector3.down, furthestEdgeDist);
-        //Debug.Log(onGround);
+        bool isOnGrnd = Physics.Raycast(transform.position, Vector3.down, furthestEdgeDist);
+
+        if (isOnGrnd)
+        {
+            elapsedCTime = 0f;
+            onGround = true;
+        }
+        else if(elapsedCTime < maxCoyoteTime)
+        {
+            elapsedCTime += Time.deltaTime;
+        }
+        else
+        {
+            onGround = false;
+        }
+
         debugPos = endPos;
     }
 
