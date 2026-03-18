@@ -155,7 +155,7 @@ MonoBehaviour:
   rootOffset: {x: 0, y: 0, z: 0}
   armNormal: {x: -2, y: 1.5}
   armMagnitude: 10
-  lerpT: 10
+  lerpT: 25
   minPitch: -15
   maxPitch: 10
 --- !u!114 &4524369369953399848
