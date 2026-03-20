@@ -199,7 +199,7 @@ public class PlayerControl : MonoBehaviour
         if(rb.linearVelocity.magnitude > heavyImpactThreshold)
         {
             // create particle effect + sfx here
-            Debug.Log("Heavy Impact " + rb.linearVelocity.magnitude);
+            //Debug.Log("Heavy Impact " + rb.linearVelocity.magnitude);
             ContactPoint point = collision.GetContact(0);
             GameObject inst = Instantiate(heavyImpactParticle, point.point, Quaternion.Euler(point.normal));
             inst.transform.localScale = transform.lossyScale;
