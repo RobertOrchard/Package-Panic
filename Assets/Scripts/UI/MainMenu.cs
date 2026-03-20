@@ -3,19 +3,25 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] GameObject Main_Canvas;
-    [SerializeField] GameObject Credit_Canvas;
+    [SerializeField] CanvasGroup mainCanvas;
+    [SerializeField] CanvasGroup creditCanvas;
+
+    private void Awake()
+    {
+        SetGroup(mainCanvas, true);
+        SetGroup(creditCanvas, false);
+    }
 
     public void Go_To_StartMenu()
     {
-        Credit_Canvas.SetActive(false);
-        Main_Canvas.SetActive(true);
+        SetGroup(mainCanvas, true);
+        SetGroup(creditCanvas, false);
     }
 
     public void Go_To_CreditMenu()
     {
-        Main_Canvas.SetActive(false);
-        Credit_Canvas.SetActive(true);
+        SetGroup(mainCanvas, false);
+        SetGroup(creditCanvas, true);
     }
     public void Go_To_Game()
     {
@@ -27,4 +33,10 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
+    private void SetGroup(CanvasGroup group, bool setOn)
+    {
+        group.alpha = setOn ? 1 : 0;
+        group.blocksRaycasts = setOn;
+        group.interactable = setOn;
+    }
 }
