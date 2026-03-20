@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class Global : MonoBehaviour
 {
@@ -43,12 +44,19 @@ public class Global : MonoBehaviour
         input.Enable();
 
         Cursor.lockState = CursorLockMode.Locked;
+
+        SceneManager.sceneLoaded += SceneChanged;
     }
 
     // used for initializing values
     private void Start()
     {
         ReorientWorld();
+    }
+
+    void SceneChanged(Scene _scene, LoadSceneMode _mode)
+    {
+        IsPaused = false;
     }
 
     #region Update
@@ -84,7 +92,10 @@ public class Global : MonoBehaviour
 
     private void OnDestroy()
     {
-        urpAsset.shadowDistance = 50f;
+        input?.Disable();
+
+        if (urpAsset != null) 
+            urpAsset.shadowDistance = 50f;
     }
 
     // recalculates world directions for the player to move along

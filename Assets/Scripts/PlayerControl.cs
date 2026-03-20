@@ -44,6 +44,11 @@ public class PlayerControl : MonoBehaviour
         global = Global.Instance;
     }
 
+    private void OnDestroy()
+    {
+        input?.Disable();
+    }
+
     private void FixedUpdate()
     {
         if (global != null && global.IsPaused) return;

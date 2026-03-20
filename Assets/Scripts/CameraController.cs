@@ -33,6 +33,8 @@ public class CameraController : MonoBehaviour
     float lastYaw = 0f;
     private void LateUpdate()
     {
+        if (global == null) return;
+
         Vector3 _offset = Vector3.zero;
         _offset += global.GlobalForward * rootOffset.z;
         _offset += global.GlobalRight * rootOffset.x;
