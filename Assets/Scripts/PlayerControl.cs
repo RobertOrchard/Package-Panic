@@ -15,6 +15,9 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] float maxCoyoteTime = 0.1f;
     float elapsedCTime = 0f;
 
+    [SerializeField] float heavyImpactThreshold = 3.5f;
+    [SerializeField] GameObject heavyImpactParticle;
+
     Rigidbody rb;
     CameraController camCont = null;
     private InputSystem_Actions input;
@@ -191,6 +194,19 @@ public class PlayerControl : MonoBehaviour
         debugPos = endPos;
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(rb.linearVelocity.magnitude > heavyImpactThreshold)
+        {
+            // create particle effect + sfx here
+            Debug.Log("Heavy Impact " + rb.linearVelocity.magnitude);
+            ContactPoint point = collision.GetContact(0);
+            GameObject inst = Instantiate(heavyImpactParticle, point.point, Quaternion.Euler(point.normal));
+            inst.transform.localScale = transform.lossyScale;
+        }
+    }
+
+    #region Public Funcs
     public void DeniedPickup(Vector3 objectPosition)
     {
         Vector3 launchNormal = Vector3.ProjectOnPlane(transform.position - objectPosition, Vector3.up).normalized;
@@ -217,4 +233,5 @@ public class PlayerControl : MonoBehaviour
         digits = Mathf.FloorToInt(Mathf.Log10(valInMetersCubed * 100f) + 1);
         Debug.Log(digits);
     }
+    #endregion
 }

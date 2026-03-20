@@ -205,6 +205,8 @@ MonoBehaviour:
   airControlMult: 0.1
   jumpCooldown: 0.4
   maxCoyoteTime: 0.05
+  heavyImpactThreshold: 3.5
+  heavyImpactParticle: {fileID: 3381747185962714859, guid: 166b79d39eea3ba43a7286dead89ab2d, type: 3}
 --- !u!114 &753529987909114287
 MonoBehaviour:
   m_ObjectHideFlags: 0
