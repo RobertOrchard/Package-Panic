@@ -24,6 +24,7 @@ public class PlayerControl : MonoBehaviour
 
     private Global global = null;
 
+    Vector3 lastVelocity = Vector3.zero;
     Transform jumpFace = null;
     bool onGround = true;
     int digits = 0; // how many digits in the volume when measured from grams (kg / 100)
@@ -57,6 +58,8 @@ public class PlayerControl : MonoBehaviour
         if (global != null && global.IsPaused) return;
 
         Movement();
+
+        lastVelocity = rb.linearVelocity;
     }
 
     #region Controls
@@ -196,12 +199,11 @@ public class PlayerControl : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(rb.linearVelocity.magnitude > heavyImpactThreshold)
+        if(lastVelocity.magnitude > heavyImpactThreshold)
         {
-            // create particle effect + sfx here
-            //Debug.Log("Heavy Impact " + rb.linearVelocity.magnitude);
             ContactPoint point = collision.GetContact(0);
-            GameObject inst = Instantiate(heavyImpactParticle, point.point, Quaternion.Euler(point.normal));
+            Debug.Log(point.normal);
+            GameObject inst = Instantiate(heavyImpactParticle, point.point, Quaternion.LookRotation(point.normal));
             inst.transform.localScale = transform.lossyScale;
         }
     }
