@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SceneTransitionHelper : MonoBehaviour
 {
-    [SerializeField] Canvas outCanvas;
-    [SerializeField] Canvas inCanvas;
+    [SerializeField] CanvasGroup outCanvas;
+    [SerializeField] Slider loadSlider;
+    [SerializeField] CanvasGroup inCanvas;
 
     public static SceneTransitionHelper Instance;
     TransitionState state = TransitionState.Done;
@@ -14,7 +16,7 @@ public class SceneTransitionHelper : MonoBehaviour
     public Action DoneLoadingIn;
     public bool loaded = false;
 
-    [SerializeField] float inDuration = 1f; // how long to transition in to scene
+    [SerializeField] float inDuration = 1.5f; // how long to transition in to scene
 
     private void Awake()
     {
@@ -54,10 +56,12 @@ public class SceneTransitionHelper : MonoBehaviour
     IEnumerator OutTransition(string sceneName)
     {
         state = TransitionState.Out;
+        outCanvas.alpha = 1f;
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
 
         while (!operation.isDone)
         {
+            loadSlider.value = Mathf.Clamp01(operation.progress / .9f);
             yield return null;
         }
     }
@@ -65,13 +69,16 @@ public class SceneTransitionHelper : MonoBehaviour
     IEnumerator InTransition()
     {
         state = TransitionState.In;
-        float prog = 0f;
+        inCanvas.alpha = 1f;
+        float remaining = inDuration;
 
-        while(prog < inDuration)
+        while(remaining > 0f)
         {
-            prog += Time.deltaTime;
+            remaining -= Time.deltaTime;
+            inCanvas.alpha = remaining / inDuration;
             yield return null;
         }
+        inCanvas.alpha = 0f;
 
         state = TransitionState.Done;
         DoneLoadingIn?.Invoke();
