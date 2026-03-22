@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PauseScreen : MonoBehaviour
 {
@@ -55,7 +54,7 @@ public class PauseScreen : MonoBehaviour
     public void QuitConfirm()
     {
         // quit to mainmenu
-        SceneManager.LoadScene(mainMenuName);
+        SceneTransitionHelper.LoadScene(mainMenuName);
     }
     #endregion
 

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -25,7 +24,7 @@ public class MainMenu : MonoBehaviour
     }
     public void Go_To_Game()
     {
-        SceneManager.LoadScene("1 - House");
+        SceneTransitionHelper.LoadScene("1 - House");
     }
 
     public void Quit_Game()
