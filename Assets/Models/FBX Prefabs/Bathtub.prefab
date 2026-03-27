@@ -84,10 +84,26 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -4683669308469848369, guid: ecafab5b0269bcd45af16c7d51732330, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b6c161feb95ecf8428354a5fad9dacb3, type: 2}
+    - target: {fileID: -1439730007547781893, guid: ecafab5b0269bcd45af16c7d51732330, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b6c161feb95ecf8428354a5fad9dacb3, type: 2}
     - target: {fileID: 919132149155446097, guid: ecafab5b0269bcd45af16c7d51732330, type: 3}
       propertyPath: m_Name
       value: Bathtub (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1129496810705857465, guid: ecafab5b0269bcd45af16c7d51732330, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b6c161feb95ecf8428354a5fad9dacb3, type: 2}
+    - target: {fileID: 7071182760956848314, guid: ecafab5b0269bcd45af16c7d51732330, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b6c161feb95ecf8428354a5fad9dacb3, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
