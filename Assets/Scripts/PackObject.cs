@@ -13,7 +13,7 @@ public class PackObject : MonoBehaviour
 
     private void Awake()
     {
-        gameObject.tag = Global.PackObjectTag;
+        RecursiveTagSetter(transform);
 
         // check for infinite loop
         for (int i = 0; i < insides.Count; i++)
@@ -21,6 +21,15 @@ public class PackObject : MonoBehaviour
             if (insides[i] == null) continue;
 
             if (insides[i].insides.Contains(this)) insides[i].insides.Remove(this);
+        }
+    }
+
+    void RecursiveTagSetter(Transform t)
+    {
+        t.tag = Global.PackObjectTag;
+        for(int i = 0; i < t.childCount; i++)
+        {
+            RecursiveTagSetter(t.GetChild(i));
         }
     }
 

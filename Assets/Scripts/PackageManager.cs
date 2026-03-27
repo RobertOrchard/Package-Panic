@@ -32,8 +32,18 @@ public class PackageManager : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(Global.PackObjectTag))
         {
-            collision.gameObject.TryGetComponent<PackObject>(out PackObject objData);
 
+            collision.gameObject.TryGetComponent<PackObject>(out PackObject objData); // check in this obj
+            // check in parent if failed
+            if (objData == null && collision.transform.parent != null) 
+            {
+                collision.transform.parent.TryGetComponent<PackObject>(out objData);
+                // check in parent2
+                if (objData == null && collision.transform.parent.parent != null) 
+                    collision.transform.parent.parent.TryGetComponent<PackObject>(out objData);
+            }
+
+            if (objData == null) return;
             switch (objData.PickupPermission(totalVolume))
             {
                 case PickupResponse.Allowed:
