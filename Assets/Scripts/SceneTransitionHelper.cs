@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,6 +10,11 @@ public class SceneTransitionHelper : MonoBehaviour
     [SerializeField] CanvasGroup outCanvas;
     [SerializeField] Slider loadSlider;
     [SerializeField] CanvasGroup inCanvas;
+
+    [SerializeField] CanvasGroup countdownCanvas;
+    [SerializeField] TMP_Text countdownText;
+    [SerializeField] float maxCountdownSize = 48f;
+    [SerializeField] float minCountdownSize = 24f;
 
     public static SceneTransitionHelper Instance;
     TransitionState state = TransitionState.Done;
@@ -70,15 +76,28 @@ public class SceneTransitionHelper : MonoBehaviour
     {
         state = TransitionState.In;
         inCanvas.alpha = 1f;
+        countdownCanvas.alpha = 1f;
         float remaining = inDuration;
+        int floorTime = Mathf.FloorToInt(remaining);
+        countdownText.text = floorTime.ToString();
 
-        while(remaining > 0f)
+        while (remaining > 0f)
         {
             remaining -= Time.unscaledDeltaTime;
             inCanvas.alpha = remaining / inDuration;
+
+            if(floorTime != Mathf.FloorToInt(remaining))
+            {
+                floorTime = Mathf.FloorToInt(remaining);
+                countdownText.text = (floorTime + 1).ToString();
+                // play some sfx or sumting
+            }
+            countdownText.fontSize = Mathf.Lerp(minCountdownSize, maxCountdownSize, floorTime > 0 ? remaining % floorTime : remaining);
+
             yield return null;
         }
         inCanvas.alpha = 0f;
+        countdownCanvas.alpha = 0f;
 
         state = TransitionState.Done;
         DoneLoadingIn?.Invoke();
