@@ -74,7 +74,7 @@ public class SceneTransitionHelper : MonoBehaviour
 
         while(remaining > 0f)
         {
-            remaining -= Time.deltaTime;
+            remaining -= Time.unscaledDeltaTime;
             inCanvas.alpha = remaining / inDuration;
             yield return null;
         }
@@ -82,6 +82,7 @@ public class SceneTransitionHelper : MonoBehaviour
 
         state = TransitionState.Done;
         DoneLoadingIn?.Invoke();
+        DoneLoadingIn = null;
     }
 
 

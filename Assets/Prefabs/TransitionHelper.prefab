@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 8549689380770046813}
   m_Layer: 0
   m_Name: TransitionHelper
-  m_TagString: Untagged
+  m_TagString: TransitionHelper
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

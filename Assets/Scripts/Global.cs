@@ -18,6 +18,7 @@ public class Global : MonoBehaviour
         set { PauseChange(value); } 
     }
     bool isPaused = false;
+    bool triggerPauseScreen = true;
 
     public float PlayerScale { get { return playerScale; } 
         set { ScaleChanged(value); playerScale = value; } }
@@ -57,6 +58,18 @@ public class Global : MonoBehaviour
     void SceneChanged(Scene _scene, LoadSceneMode _mode)
     {
         IsPaused = false;
+        //Debug.Log("Global - SceneLoaded");
+
+        if (SceneTransitionHelper.Instance == null) return;
+        if (SceneTransitionHelper.Instance.loaded) return;
+
+        triggerPauseScreen = false;
+        IsPaused = true;
+        SceneTransitionHelper.Instance.DoneLoadingIn += () =>
+        {
+            triggerPauseScreen = true;
+            IsPaused = false;
+        };
     }
 
     #region Update
@@ -87,7 +100,7 @@ public class Global : MonoBehaviour
             Time.timeScale = 1f;
             Cursor.lockState = CursorLockMode.Locked;
         }
-        if (PauseScreen.Instance != null) PauseScreen.Instance.TogglePause(newState);
+        if (PauseScreen.Instance != null && triggerPauseScreen) PauseScreen.Instance.TogglePause(newState);
     }
 
     private void OnDestroy()

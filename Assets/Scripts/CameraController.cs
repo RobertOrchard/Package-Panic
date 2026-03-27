@@ -27,7 +27,7 @@ public class CameraController : MonoBehaviour
         global = Global.Instance;
     }
 
-    float rotYaw = 0f;
+    float rotYaw = -90f;
     float rotPitch = 0f;
 
     float lastYaw = 0f;
@@ -51,7 +51,16 @@ public class CameraController : MonoBehaviour
 
         Vector3 dest = target.transform.position + _offset + _arm;
 
-        cam.transform.position = Vector3.Lerp(cam.transform.position, dest, lerpT * Time.deltaTime);
+        Vector3 diff = cam.transform.position - dest;
+
+        if(diff.magnitude > lerpT * Time.unscaledDeltaTime)
+        {
+            cam.transform.position -= lerpT * Time.unscaledDeltaTime * diff.normalized;
+        }
+        else
+        {
+            cam.transform.position = dest;
+        }
 
         cam.transform.LookAt(target.transform.position + _offset);
 

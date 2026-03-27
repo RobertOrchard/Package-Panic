@@ -202,7 +202,6 @@ public class PlayerControl : MonoBehaviour
         if(lastVelocity.magnitude > heavyImpactThreshold)
         {
             ContactPoint point = collision.GetContact(0);
-            Debug.Log(point.normal);
             GameObject inst = Instantiate(heavyImpactParticle, point.point, Quaternion.LookRotation(point.normal));
             inst.transform.localScale = transform.lossyScale;
         }
