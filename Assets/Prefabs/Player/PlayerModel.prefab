@@ -96,6 +96,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 7a91abfa604b5fc489a6c396ad9bdfab, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 807704b1b6a7e7b4e8d58d7fc44b5f53, type: 2}
     - target: {fileID: 919132149155446097, guid: 7a91abfa604b5fc489a6c396ad9bdfab, type: 3}
       propertyPath: m_Name
       value: Player_Box

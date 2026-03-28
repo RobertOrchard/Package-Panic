@@ -10,6 +10,9 @@ public class Global : MonoBehaviour
     UniversalRenderPipelineAsset urpAsset;
     InputSystem_Actions input;
 
+    public LevelData levelData;
+    [SerializeField] GameObject stretchGameObject;
+
     public static readonly string PackObjectTag = "Packable";
     public static float Gravity = 9.81f;
 
@@ -30,8 +33,11 @@ public class Global : MonoBehaviour
     // Setup Instance
     private void Awake()
     {
-        if(Instance != null)
+        levelData.stretchTarget = stretchGameObject;
+
+        if (Instance != null)
         {
+            Instance.levelData = levelData;
             Destroy(gameObject);
             return;
         }
