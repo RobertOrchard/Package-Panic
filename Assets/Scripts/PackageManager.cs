@@ -64,6 +64,7 @@ public class PackageManager : MonoBehaviour
         totalVolume += objVolume;
 
         CalculateSurfaceArea();
+        Global.Instance.NewPlayerVolume(totalVolume);
     }
 
     // Volume = length * width * height

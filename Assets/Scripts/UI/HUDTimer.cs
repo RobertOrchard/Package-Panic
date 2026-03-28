@@ -12,6 +12,7 @@ public class HUDTimer : MonoBehaviour
 
     bool localIsPaused = true;
 
+    public float RemainingTime { get { return this.RemainingTime; } }
     float remainingTime = 0f;
 
     public Action TimeOut = null; // called upon time finished

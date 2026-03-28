@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -30,10 +31,14 @@ public class Global : MonoBehaviour
     public Vector3 GlobalForward = Vector3.forward;
     public Vector3 GlobalRight = Vector3.right;
 
+    public Action EndLevel;
+
     // Setup Instance
     private void Awake()
     {
         levelData.stretchTarget = stretchGameObject;
+        levelData.targetReached = false;
+        levelData.stretchReached = false;
 
         if (Instance != null)
         {
@@ -41,6 +46,8 @@ public class Global : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        EndLevel = null;
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
@@ -132,5 +139,18 @@ public class Global : MonoBehaviour
     private void ScaleChanged(float _value)
     {
         urpAsset.shadowDistance = _value * 50f;
+    }
+
+    public void NewPlayerVolume(float _volume)
+    {
+        if(!levelData.targetReached && _volume < levelData.targetVolume) return;
+
+        levelData.targetReached = true;
+
+        if(!levelData.stretchReached && _volume < levelData.stretchVolume) return;
+
+        levelData.stretchReached = true;
+        EndLevel?.Invoke();
+        float time = HUDManager.Instance.timer.RemainingTime;
     }
 }
