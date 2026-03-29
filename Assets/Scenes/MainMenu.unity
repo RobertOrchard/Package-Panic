@@ -211,6 +211,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TransitionHelper
       objectReference: {fileID: 0}
+    - target: {fileID: 8549689380770046813, guid: cf1a61656549edd419210cd45a2c7401, type: 3}
+      propertyPath: runCountdown
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

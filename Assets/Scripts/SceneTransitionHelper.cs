@@ -12,6 +12,7 @@ public class SceneTransitionHelper : MonoBehaviour
     [SerializeField] CanvasGroup inCanvas;
 
     [SerializeField] CanvasGroup countdownCanvas;
+    [SerializeField] bool runCountdown = true;
     [SerializeField] TMP_Text countdownText;
     [SerializeField] float maxCountdownSize = 48f;
     [SerializeField] float minCountdownSize = 24f;
@@ -76,7 +77,7 @@ public class SceneTransitionHelper : MonoBehaviour
     {
         state = TransitionState.In;
         inCanvas.alpha = 1f;
-        countdownCanvas.alpha = 1f;
+        if(runCountdown) countdownCanvas.alpha = 1f;
         float remaining = inDuration;
         int floorTime = Mathf.FloorToInt(remaining);
         countdownText.text = floorTime.ToString();
