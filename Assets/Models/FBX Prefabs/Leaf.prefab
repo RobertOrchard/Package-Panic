@@ -99,7 +99,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 0d00f06a20a521940b49315f5df2554a, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: b6c161feb95ecf8428354a5fad9dacb3, type: 2}
+      objectReference: {fileID: 2100000, guid: 9ad0b0fe313b3114ebe5d0738d61768d, type: 2}
     - target: {fileID: 919132149155446097, guid: 0d00f06a20a521940b49315f5df2554a, type: 3}
       propertyPath: m_Name
       value: Leaf
