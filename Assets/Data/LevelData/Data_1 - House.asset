@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Data_1 - House
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   targetVolume: 5
-  stretchVolume: 50
+  stretchVolume: 200

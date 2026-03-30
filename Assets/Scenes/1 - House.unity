@@ -18547,6 +18547,10 @@ PrefabInstance:
       propertyPath: levelData
       value: 
       objectReference: {fileID: 11400000, guid: db981de00ffdbdf429adefb7722219af, type: 2}
+    - target: {fileID: 7637155442668416437, guid: dcf3821bc8c5c61418efdeca1ef4a1ce, type: 3}
+      propertyPath: gameSummary
+      value: 
+      objectReference: {fileID: 1399851389}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -29622,6 +29626,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb4bf0cd61ceff846972215f463ad266, type: 3}
+--- !u!114 &1399851389 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5169454916503769317, guid: eb4bf0cd61ceff846972215f463ad266, type: 3}
+  m_PrefabInstance: {fileID: 1399851388}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f7185afdca3c084295dd1c2a22a7272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameSummary
 --- !u!1001 &1400612363
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -13,6 +14,7 @@ public class Global : MonoBehaviour
 
     public LevelData levelData;
     [SerializeField] GameObject stretchGameObject;
+    [SerializeField] GameSummary gameSummary;
 
     public static readonly string PackObjectTag = "Packable";
     public static float Gravity = 9.81f;
@@ -47,8 +49,6 @@ public class Global : MonoBehaviour
             return;
         }
 
-        EndLevel = null;
-
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
@@ -57,9 +57,22 @@ public class Global : MonoBehaviour
         input = new();
         input.Enable();
 
-        Cursor.lockState = CursorLockMode.Locked;
-
         SceneManager.sceneLoaded += SceneChanged;
+    }
+
+    IEnumerator DelayedStart()
+    {
+        yield return null;
+
+        if (HUDManager.Instance)
+        {
+            HUDManager.Instance.timer.TimeOut += TimeUp;
+        }
+    }
+
+    void TimeUp()
+    {
+        EndLevel?.Invoke();
     }
 
     // used for initializing values
@@ -73,16 +86,40 @@ public class Global : MonoBehaviour
         IsPaused = false;
         //Debug.Log("Global - SceneLoaded");
 
-        if (SceneTransitionHelper.Instance == null) return;
-        if (SceneTransitionHelper.Instance.loaded) return;
-
-        triggerPauseScreen = false;
-        IsPaused = true;
-        SceneTransitionHelper.Instance.DoneLoadingIn += () =>
+        if (SceneTransitionHelper.Instance != null && !SceneTransitionHelper.Instance.loaded)
         {
-            triggerPauseScreen = true;
-            IsPaused = false;
-        };
+            triggerPauseScreen = false;
+            IsPaused = true;
+            SceneTransitionHelper.Instance.DoneLoadingIn += () =>
+            {
+                triggerPauseScreen = true;
+                IsPaused = false;
+            };
+        }
+
+        Cursor.lockState = CursorLockMode.Locked;
+
+        EndLevel = null;
+        EndLevel += EndStage;
+
+        StartCoroutine(DelayedStart());
+    }
+
+    void EndStage()
+    {
+        Time.timeScale = 0f;
+
+        if(!gameSummary) return;
+
+        Cursor.lockState = CursorLockMode.Confined;
+
+        float _time = (HUDManager.Instance.timer.RemainingTime > 0f) ? HUDManager.Instance.mapDuration - HUDManager.Instance.timer.RemainingTime : HUDManager.Instance.mapDuration;
+
+        GameSummary.SummaryScore _score = GameSummary.SummaryScore.Failed;
+        if (levelData.targetReached) _score = GameSummary.SummaryScore.Cleared;
+        if(levelData.stretchReached) _score = GameSummary.SummaryScore.Perfect;
+
+        gameSummary.RunSummary(curVolume, _time, _score);
     }
 
     #region Update
@@ -141,9 +178,12 @@ public class Global : MonoBehaviour
         urpAsset.shadowDistance = _value * 50f;
     }
 
+    float curVolume = 0f;
     public void NewPlayerVolume(float _volume)
     {
-        if(!levelData.targetReached && _volume < levelData.targetVolume) return;
+        curVolume = _volume;
+
+        if (!levelData.targetReached && _volume < levelData.targetVolume) return;
 
         levelData.targetReached = true;
 

@@ -91,6 +91,6 @@ public class PackageManager : MonoBehaviour
         if (HUDManager.Instance) HUDManager.Instance.UpdateVolume(totalVolume);
 
         Global.Instance.PlayerScale = (transform.localScale.x + transform.localScale.y + transform.localScale.z) / 3f;
-        Debug.Log("New playerscale" + Global.Instance.PlayerScale);
+        //Debug.Log("New playerscale" + Global.Instance.PlayerScale);
     }
 }

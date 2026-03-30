@@ -7,7 +7,7 @@ public class HUDManager : MonoBehaviour
     public static HUDManager Instance = null;
 
     [SerializeField] public HUDTimer timer;
-    [SerializeField] float mapDuration = 600f;
+    public float mapDuration = 600f;
 
     [SerializeField] TMP_Text volumeText;
 
