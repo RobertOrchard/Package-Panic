@@ -103,11 +103,11 @@ PrefabInstance:
     - target: {fileID: -4683669308469848369, guid: cfe4241ac1aa6f44db37ebfcfe4f074f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: b6c161feb95ecf8428354a5fad9dacb3, type: 2}
+      objectReference: {fileID: 2100000, guid: eeebf1c80fd935741903792bc7a2bb00, type: 2}
     - target: {fileID: -1461304994638716399, guid: cfe4241ac1aa6f44db37ebfcfe4f074f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: b6c161feb95ecf8428354a5fad9dacb3, type: 2}
+      objectReference: {fileID: 2100000, guid: 7891c4df557c42d489cff67ab6d24111, type: 2}
     - target: {fileID: 919132149155446097, guid: cfe4241ac1aa6f44db37ebfcfe4f074f, type: 3}
       propertyPath: m_Name
       value: Wall_Door

@@ -96,6 +96,22 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4683669308469848369, guid: 17d8baca867a6304daf8a65e296a15f1, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0cfd2272e46278142ad1f2e7fcb6a187, type: 2}
+    - target: {fileID: -1461304994638716399, guid: 17d8baca867a6304daf8a65e296a15f1, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1bc57049c9120f742b2391cdadd40231, type: 2}
+    - target: {fileID: -804731622281664130, guid: 17d8baca867a6304daf8a65e296a15f1, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 518684fb6911e9e449e6c6c7a0e38370, type: 2}
+    - target: {fileID: -678588488315902003, guid: 17d8baca867a6304daf8a65e296a15f1, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 55775c2f1a725844c9b727c3f6f40a90, type: 2}
     - target: {fileID: 919132149155446097, guid: 17d8baca867a6304daf8a65e296a15f1, type: 3}
       propertyPath: m_Name
       value: Bed 1
