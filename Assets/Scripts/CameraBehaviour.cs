@@ -48,6 +48,11 @@ public class CameraBehaviour : MonoBehaviour
 
         for(int m = 0; m < prevRends.Count; m++)
         {
+            if (prevRends[m] == null)
+            {
+                prevRends.RemoveAt(m);
+                continue;
+            }
             if(curRends.Contains(prevRends[m])) continue;
 
             Material[] mats = prevRends[m].materials;

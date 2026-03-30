@@ -46,7 +46,11 @@ public class Global : MonoBehaviour
         if (stretchGameObject)
         {
             LevelTarget target = stretchGameObject.gameObject.AddComponent<LevelTarget>();
-            target.Collected += () => levelData.stretchReached = true;
+            target.Collected += () =>
+            {
+                levelData.stretchReached = true;
+                if (!levelEnded) EndLevel?.Invoke();
+            };
         }
 
         if (Instance != null)
