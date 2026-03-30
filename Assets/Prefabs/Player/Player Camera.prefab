@@ -156,7 +156,7 @@ MonoBehaviour:
   armNormal: {x: -2, y: 1.5}
   armMagnitude: 10
   lerpT: 250
-  minPitch: -15
+  minPitch: -20
   maxPitch: 10
 --- !u!114 &4524369369953399848
 MonoBehaviour:
