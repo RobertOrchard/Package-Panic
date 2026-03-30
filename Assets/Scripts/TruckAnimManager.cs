@@ -13,15 +13,18 @@ public class TruckAnimManager : MonoBehaviour
     [SerializeField] float minY;
     [SerializeField] float maxY;
     [SerializeField] float speedY;
+    [SerializeField] AnimationCurve curveY;
     bool pulseUp = true;
 
     [SerializeField] float minX;
     [SerializeField] float maxX;
     [SerializeField] float speedX;
+    [SerializeField] AnimationCurve curveX;
     float targetX = 0f;
     [SerializeField] float minZ;
     [SerializeField] float maxZ;
     [SerializeField] float speedZ;
+    [SerializeField] AnimationCurve curveZ;
     float targetZ = 0f;
 
     private void Awake()
@@ -58,7 +61,10 @@ public class TruckAnimManager : MonoBehaviour
             pulseUp = true;
         }
 
-        return curY + (Time.deltaTime * speedY * (pulseUp ? 1f : -1f));
+        float curveTime = (curY - minY) / (maxY - minY);
+        float curveVal = curveY.Evaluate(curveTime);
+
+        return curY + (Time.deltaTime * speedY * curveVal * (pulseUp ? 1f : -1f));
     }
 
     float XSway()
@@ -71,7 +77,10 @@ public class TruckAnimManager : MonoBehaviour
         }
         bool dir = curX < targetX;
 
-        return curX + (Time.deltaTime * speedX * (dir ? 1f : -1f));
+        float curveTime = (curX - minX) / (maxX - minX);
+        float curveVal = curveX.Evaluate(curveTime);
+
+        return curX + (Time.deltaTime * speedX * curveVal * (dir ? 1f : -1f));
     }
     float ZSway()
     {
@@ -83,6 +92,9 @@ public class TruckAnimManager : MonoBehaviour
         }
         bool dir = curZ < targetZ;
 
-        return curZ + (Time.deltaTime * speedZ * (dir ? 1f : -1f));
+        float curveTime = (curZ - minZ) / (maxZ - minZ);
+        float curveVal = curveZ.Evaluate(curveTime);
+
+        return curZ + (Time.deltaTime * speedZ * curveVal * (dir ? 1f : -1f));
     }
 }
