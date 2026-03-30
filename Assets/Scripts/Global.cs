@@ -13,7 +13,7 @@ public class Global : MonoBehaviour
     InputSystem_Actions input;
 
     public LevelData levelData;
-    [SerializeField] GameObject stretchGameObject;
+    [SerializeField] PackObject stretchGameObject;
     [SerializeField] GameSummary gameSummary;
 
     public static readonly string PackObjectTag = "Packable";
@@ -34,13 +34,20 @@ public class Global : MonoBehaviour
     public Vector3 GlobalRight = Vector3.right;
 
     public Action EndLevel;
+    public bool levelEnded = false;
 
     // Setup Instance
     private void Awake()
     {
-        levelData.stretchTarget = stretchGameObject;
+        levelData.stretchTarget = stretchGameObject.gameObject;
         levelData.targetReached = false;
         levelData.stretchReached = false;
+
+        if (stretchGameObject)
+        {
+            LevelTarget target = stretchGameObject.gameObject.AddComponent<LevelTarget>();
+            target.Collected += () => levelData.stretchReached = true;
+        }
 
         if (Instance != null)
         {
@@ -72,7 +79,7 @@ public class Global : MonoBehaviour
 
     void TimeUp()
     {
-        EndLevel?.Invoke();
+        if (!levelEnded) EndLevel?.Invoke();
     }
 
     // used for initializing values
@@ -99,6 +106,8 @@ public class Global : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
 
+        levelEnded = false;
+
         EndLevel = null;
         EndLevel += EndStage;
 
@@ -107,6 +116,8 @@ public class Global : MonoBehaviour
 
     void EndStage()
     {
+        levelEnded = true;
+
         Time.timeScale = 0f;
 
         if(!gameSummary) return;
@@ -190,7 +201,7 @@ public class Global : MonoBehaviour
         if(!levelData.stretchReached && _volume < levelData.stretchVolume) return;
 
         levelData.stretchReached = true;
-        EndLevel?.Invoke();
+        if (!levelEnded) EndLevel?.Invoke();
         float time = HUDManager.Instance.timer.RemainingTime;
     }
 }
