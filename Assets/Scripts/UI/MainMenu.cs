@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class MainMenu : MonoBehaviour
@@ -5,10 +6,29 @@ public class MainMenu : MonoBehaviour
     [SerializeField] CanvasGroup mainCanvas;
     [SerializeField] CanvasGroup creditCanvas;
 
+    [SerializeField] CanvasGroup highScoreCanvas;
+    [SerializeField] TMP_Text timeText;
+    [SerializeField] TMP_Text volumeText;
+
     private void Awake()
     {
         SetGroup(mainCanvas, true);
         SetGroup(creditCanvas, false);
+
+        SetupScoreCanvas();
+    }
+
+    void SetupScoreCanvas()
+    {
+        if(PlayerPrefs.HasKey(GameSummary.saved_bestTime) == false || PlayerPrefs.HasKey(GameSummary.saved_bestVolume) == false)
+        {
+            highScoreCanvas.alpha = 0f;
+            return;
+        }
+
+        highScoreCanvas.alpha = 1f;
+        timeText.text = PlayerPrefs.GetFloat(GameSummary.saved_bestTime).ToString() + "s";
+        volumeText.text = PlayerPrefs.GetFloat(GameSummary.saved_bestVolume).ToString() + "m<sup>3";
     }
 
     public void Go_To_StartMenu()

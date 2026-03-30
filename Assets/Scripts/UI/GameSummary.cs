@@ -45,11 +45,11 @@ public class GameSummary : MonoBehaviour
         cGroup.alpha = 1f;
         StartCoroutine(Summary());
 
-        if (PlayerPrefs.GetFloat(saved_bestVolume, 0f) < volume)
+        if (!PlayerPrefs.HasKey(saved_bestVolume) || PlayerPrefs.GetFloat(saved_bestVolume, 0f) < volume)
         {
             PlayerPrefs.SetFloat(saved_bestVolume, volume);
         }
-        if (PlayerPrefs.GetFloat(saved_bestTime, 0f) > time)
+        if (!PlayerPrefs.HasKey(saved_bestTime) || PlayerPrefs.GetFloat(saved_bestTime, 0f) > time)
         {
             PlayerPrefs.SetFloat(saved_bestTime, time);
         }
