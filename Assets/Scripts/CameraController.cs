@@ -53,9 +53,9 @@ public class CameraController : MonoBehaviour
 
         Vector3 diff = cam.transform.position - dest;
 
-        if(diff.magnitude > lerpT * Time.unscaledDeltaTime)
+        if(diff.magnitude > lerpT * Time.unscaledDeltaTime * global.PlayerScale)
         {
-            cam.transform.position -= lerpT * Time.unscaledDeltaTime * diff.normalized;
+            cam.transform.position -= lerpT * Time.unscaledDeltaTime * global.PlayerScale * diff.normalized;
         }
         else
         {
