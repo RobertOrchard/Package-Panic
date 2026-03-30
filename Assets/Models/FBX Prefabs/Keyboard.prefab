@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6933616836856894768}
+  - component: {fileID: -254419969586206187}
   m_Layer: 0
   m_Name: Keyboard
   m_TagString: Untagged
@@ -32,6 +33,23 @@ Transform:
   - {fileID: 7750821897559598113}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-254419969586206187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8298542817956026370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4baa925b7816f37458a522d8d127c5bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PackObject
+  beingDestroyed: 0
+  volume: 0.04
+  pickupRequirementMult: 1
+  IgnoreThreshold: 0.1
+  insides: []
 --- !u!1001 &7789760668041118666
 PrefabInstance:
   m_ObjectHideFlags: 0

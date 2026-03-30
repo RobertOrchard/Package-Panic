@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PackObject
   beingDestroyed: 0
-  volume: 0.00001
+  volume: 0.00005
   pickupRequirementMult: 0
   IgnoreThreshold: 0.1
   insides: []

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3010312676984533016}
+  - component: {fileID: 1893789866148885814}
   m_Layer: 0
   m_Name: Shirt
   m_TagString: Untagged
@@ -32,6 +33,23 @@ Transform:
   - {fileID: 6224226343100587043}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1893789866148885814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593099247371090791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4baa925b7816f37458a522d8d127c5bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PackObject
+  beingDestroyed: 0
+  volume: 0.03
+  pickupRequirementMult: 1
+  IgnoreThreshold: 0.1
+  insides: []
 --- !u!1001 &5902633189584600008
 PrefabInstance:
   m_ObjectHideFlags: 0
