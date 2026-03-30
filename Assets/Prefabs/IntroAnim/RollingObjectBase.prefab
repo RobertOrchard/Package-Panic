@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8804927801879815358}
   - component: {fileID: 1486926261340611012}
   - component: {fileID: 1075705288785799282}
+  - component: {fileID: -2748616313303440715}
   m_Layer: 0
   m_Name: RollingObjectBase
   m_TagString: Untagged
@@ -72,3 +73,15 @@ ConstantForce:
   m_RelativeForce: {x: 0, y: 0, z: 0}
   m_Torque: {x: 0, y: 0, z: -4}
   m_RelativeTorque: {x: 0, y: 0, z: 0}
+--- !u!114 &-2748616313303440715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6420532590683431465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3582357850c96f42ba1e15168485e95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AutoDeleteRollingObject
