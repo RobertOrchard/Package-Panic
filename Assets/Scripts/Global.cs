@@ -95,14 +95,18 @@ public class Global : MonoBehaviour
     void SceneChanged(Scene _scene, LoadSceneMode _mode)
     {
         IsPaused = false;
-        //Debug.Log("Global - SceneLoaded");
-        triggerPauseScreen = false;
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.Locked;
 
-        if (SceneTransitionHelper.Instance != null && !SceneTransitionHelper.Instance.loaded && SceneTransitionHelper.Instance.runCountdown)
+        if (SceneTransitionHelper.Instance != null && !SceneTransitionHelper.Instance.runCountdown) // in MM
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            triggerPauseScreen = false;
+        }
+        else if (SceneTransitionHelper.Instance != null && !SceneTransitionHelper.Instance.loaded)
         {
             Cursor.lockState = CursorLockMode.Locked;
 
+            triggerPauseScreen = false;
             IsPaused = true;
             SceneTransitionHelper.Instance.DoneLoadingIn += () =>
             {
