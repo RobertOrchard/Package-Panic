@@ -8,6 +8,7 @@ public class TruckAnimManager : MonoBehaviour
     [SerializeField] GameObject objectBase;
     [SerializeField] List<GameObject> objects;
 
+    public List<RoadPieceLogic> roads = new();
 
     [Header("Movement")]
     [SerializeField] float minY;
@@ -21,11 +22,15 @@ public class TruckAnimManager : MonoBehaviour
     [SerializeField] float speedX;
     [SerializeField] AnimationCurve curveX;
     float targetX = 0f;
+    float startX = 0f;
     [SerializeField] float minZ;
     [SerializeField] float maxZ;
     [SerializeField] float speedZ;
     [SerializeField] AnimationCurve curveZ;
     float targetZ = 0f;
+    float startZ = 0f;
+
+    float swapThreshold = 2f; // delta * x
 
     private void Awake()
     {
@@ -46,6 +51,14 @@ public class TruckAnimManager : MonoBehaviour
     private void Update()
     {
         transform.position = new Vector3(XSway(), YPulse(), ZSway());
+
+        float _delta = Time.deltaTime;
+        for(int i = 0; i < roads.Count; i++)
+        {
+            if(roads[i] == null) continue;
+
+            roads[i].Tick(_delta);
+        }
     }
 
     float YPulse()
@@ -71,13 +84,14 @@ public class TruckAnimManager : MonoBehaviour
     {
         float curX = transform.position.x;
 
-        if(curX > targetX - .5f && curX < targetX + .5f)
+        if(curX > targetX - (swapThreshold * Time.deltaTime) && curX < targetX + (swapThreshold * Time.deltaTime))
         {
             targetX = Random.Range(minX, maxX);
+            startX = transform.position.x;
         }
         bool dir = curX < targetX;
 
-        float curveTime = (curX - minX) / (maxX - minX);
+        float curveTime = Mathf.InverseLerp(startX, targetX, curX);
         float curveVal = curveX.Evaluate(curveTime);
 
         return curX + (Time.deltaTime * speedX * curveVal * (dir ? 1f : -1f));
@@ -86,13 +100,14 @@ public class TruckAnimManager : MonoBehaviour
     {
         float curZ = transform.position.z;
 
-        if (curZ > targetZ - .5f && curZ < targetZ + .5f)
+        if (curZ > targetZ - (swapThreshold * Time.deltaTime) && curZ < targetZ + (swapThreshold * Time.deltaTime))
         {
             targetZ = Random.Range(minZ, maxZ);
+            startZ = transform.position.z;
         }
         bool dir = curZ < targetZ;
 
-        float curveTime = (curZ - minZ) / (maxZ - minZ);
+        float curveTime = Mathf.InverseLerp(startZ, targetZ, curZ);
         float curveVal = curveZ.Evaluate(curveTime);
 
         return curZ + (Time.deltaTime * speedZ * curveVal * (dir ? 1f : -1f));
