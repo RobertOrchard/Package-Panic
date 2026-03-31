@@ -110,6 +110,7 @@ public class PlayerControl : MonoBehaviour
         if(!input.Player.Jump.WasPressedThisFrame()) return;
 
         Vector3 upDir = (jumpFace.position - transform.position).normalized;
+        upDir = Vector3.up;
         rb.AddForce(rb.mass * (digits + baseJumpForce) * upDir, ForceMode.Impulse);
 
         elapsedCTime = maxCoyoteTime;
