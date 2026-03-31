@@ -96,10 +96,13 @@ public class Global : MonoBehaviour
     {
         IsPaused = false;
         //Debug.Log("Global - SceneLoaded");
+        triggerPauseScreen = false;
+        Cursor.lockState = CursorLockMode.Confined;
 
-        if (SceneTransitionHelper.Instance != null && !SceneTransitionHelper.Instance.loaded)
+        if (SceneTransitionHelper.Instance != null && !SceneTransitionHelper.Instance.loaded && SceneTransitionHelper.Instance.runCountdown)
         {
-            triggerPauseScreen = false;
+            Cursor.lockState = CursorLockMode.Locked;
+
             IsPaused = true;
             SceneTransitionHelper.Instance.DoneLoadingIn += () =>
             {
@@ -108,7 +111,7 @@ public class Global : MonoBehaviour
             };
         }
 
-        Cursor.lockState = CursorLockMode.Locked;
+        urpAsset.shadowDistance = 50f;
 
         levelEnded = false;
 
@@ -145,6 +148,7 @@ public class Global : MonoBehaviour
 
     private void PauseCheck()
     {
+        if (!triggerPauseScreen) return;
         if (!input.Player.Pause.WasPressedThisFrame()) return;
         
         IsPaused = !isPaused; // toggle using the setter calls function
