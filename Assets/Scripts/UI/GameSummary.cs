@@ -11,6 +11,8 @@ public class GameSummary : MonoBehaviour
 
     [SerializeField] float typeDelay = 0.05f;
 
+    [SerializeField] string mainMenuName;
+
     float volume = 0f;
     float time = 0f;
     SummaryScore score;
@@ -128,6 +130,11 @@ public class GameSummary : MonoBehaviour
             ind++;
             elapsed = 0f;
         }
+    }
+
+    public void ReturnButton()
+    {
+        SceneTransitionHelper.LoadScene(mainMenuName);
     }
 
     public enum SummaryScore

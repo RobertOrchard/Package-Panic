@@ -128,6 +128,7 @@ public class Global : MonoBehaviour
     void EndStage()
     {
         levelEnded = true;
+        triggerPauseScreen = false;
 
         Time.timeScale = 0f;
 
