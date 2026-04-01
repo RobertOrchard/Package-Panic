@@ -8,6 +8,7 @@ public class GameSummary : MonoBehaviour
     [SerializeField] TMP_Text volumeText;
     [SerializeField] TMP_Text timeText;
     [SerializeField] TMP_Text scoreText;
+    [SerializeField] CanvasGroup buttonGroup;
 
     [SerializeField] float typeDelay = 0.05f;
 
@@ -32,6 +33,7 @@ public class GameSummary : MonoBehaviour
     private void Awake()
     {
         cGroup.alpha = 0f;
+        buttonGroup.alpha = 0f;
     }
 
     public void RunSummary(float _volume, float _time, SummaryScore _score)
@@ -82,6 +84,8 @@ public class GameSummary : MonoBehaviour
                 break;
         }
         yield return StartCoroutine(PrintText(finalScoreText, scoreText));
+
+        buttonGroup.alpha = 1f;
     }
 
     IEnumerator PrintText(string text, TMP_Text box)
