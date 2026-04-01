@@ -33,7 +33,12 @@ public class GameSummary : MonoBehaviour
     private void Awake()
     {
         cGroup.alpha = 0f;
+        cGroup.blocksRaycasts = false;
+        cGroup.interactable = false;
+
         buttonGroup.alpha = 0f;
+        buttonGroup.blocksRaycasts = false;
+        buttonGroup.interactable = false;
     }
 
     public void RunSummary(float _volume, float _time, SummaryScore _score)
@@ -47,6 +52,8 @@ public class GameSummary : MonoBehaviour
         scoreText.text = "";
 
         cGroup.alpha = 1f;
+        cGroup.blocksRaycasts = true;
+        cGroup.interactable = true;
         StartCoroutine(Summary());
 
         if (!PlayerPrefs.HasKey(saved_bestVolume) || PlayerPrefs.GetFloat(saved_bestVolume, 0f) < volume)
@@ -86,6 +93,8 @@ public class GameSummary : MonoBehaviour
         yield return StartCoroutine(PrintText(finalScoreText, scoreText));
 
         buttonGroup.alpha = 1f;
+        buttonGroup.blocksRaycasts = true;
+        buttonGroup.interactable = true;
     }
 
     IEnumerator PrintText(string text, TMP_Text box)

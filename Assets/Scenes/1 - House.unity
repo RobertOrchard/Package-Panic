@@ -67590,6 +67590,10 @@ PrefabInstance:
       propertyPath: startingVolume
       value: 0.0001
       objectReference: {fileID: 0}
+    - target: {fileID: 1360558070738873147, guid: dd08eeff582089b428ac9e2766d83803, type: 3}
+      propertyPath: airControlMult
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1904401668727728056, guid: dd08eeff582089b428ac9e2766d83803, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.05
