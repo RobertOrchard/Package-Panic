@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class PlayerControl : MonoBehaviour
 
     [SerializeField] float heavyImpactThreshold = 3.5f;
     [SerializeField] GameObject heavyImpactParticle;
+
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip JumpAudioClip;
 
     Rigidbody rb;
     CameraController camCont = null;
@@ -96,6 +100,8 @@ public class PlayerControl : MonoBehaviour
         if(!input.Player.Jump.WasPressedThisFrame()) return;
 
         rb.AddForce(rb.mass * (digits + baseJumpForce) * Vector3.up, ForceMode.Impulse);
+
+        audioSource.PlayOneShot(JumpAudioClip);
 
         elapsedCTime = maxCoyoteTime;
         elapsedSinceJump = 0f;

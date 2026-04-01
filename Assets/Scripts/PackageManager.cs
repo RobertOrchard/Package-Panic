@@ -5,6 +5,9 @@ public class PackageManager : MonoBehaviour
 {
     [SerializeField] PlayerControl control;
 
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip PickupAudioClip;
+
     [Tooltip("X-Scale"), SerializeField] float shapeLength = 1f; // m
     [Tooltip("Y-Scale"), SerializeField] float shapeHeight = 1f; // m
     [Tooltip("Z-Scale"), SerializeField] float shapeWidth = 1f; // m
@@ -65,6 +68,8 @@ public class PackageManager : MonoBehaviour
 
         CalculateSurfaceArea();
         Global.Instance.NewPlayerVolume(totalVolume);
+
+        audioSource.PlayOneShot(PickupAudioClip);
     }
 
     // Volume = length * width * height
