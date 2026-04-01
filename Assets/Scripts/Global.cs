@@ -175,6 +175,18 @@ public class Global : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
         }
         if (PauseScreen.Instance != null && triggerPauseScreen) PauseScreen.Instance.TogglePause(newState);
+
+        if (MusicManager.instance != null)
+        {
+            if (newState)
+            {
+                MusicManager.instance.PauseMusic();
+            }
+            else
+            {
+                MusicManager.instance.UnPauseMusic();
+            }
+        }
     }
 
     private void OnDestroy()
